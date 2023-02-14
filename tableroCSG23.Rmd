@@ -5,8 +5,8 @@ output:
   flexdashboard::flex_dashboard:
     theme:
       bg: "#FFFFFF"
-      fg: "#034A94" 
-      primary: "#034A94" 
+      fg: "#944903" 
+      primary: "#944903" 
       base_font:
         google: Sen
       code_font:
@@ -68,15 +68,27 @@ t2h=t2[6:10,]
 row.names(t2h)=categoria
 ```
 
+# Tablero 1, gráficas.
+
 Column {data-width=700 .tabset}
 -----------------------------------------------------------------------
+
+### Cantidad de mujeres y hombres - Categorías.
+
+**Total participantes: 1922** Relación de cantidad de mujeres y hombres.
+
+```{r, fig.height=1}
+summary(CarreraLuz22$edad)
+
+ggplot(CarreraLuz22,aes(x=sex))+geom_bar(aes(fill=categoria))
+```
 
 ### Tiempos de carrera
 
 ```{r}
-paleta6=c("#447270", "#6B9493", "#F6E271", "#F6B916", "#F69312", "#BC6C25")
+paleta6=c("#470", "#6B9493", "#F6E271", "#F6B916", "#F69312", "#BC6C25")
 p1=ggplot(CarreraLuz22F, aes(y=timerun/60, x=categoria))+
-  geom_jitter(color="#034A94", size=1, alpha=0.9) +
+  geom_jitter(color="#07AC6B", size=1, alpha=0.9) +
   aes(color=paleta6)+
   labs(title = " ",
        y= "tiempo - min",
@@ -90,44 +102,6 @@ p1
 
 ```
 
-### Hombre por categorías
-
-```{r, fig.height=3}
-ggplot(CarreraLuz22M, aes(x = categoria, y = timerun/60 )) +
-  geom_boxplot(aes(fill = categoria)) + 
-  # facet_wrap(~sex, ncol=1, labeller = labeller(dose = etiquetas))+
-  labs(title = "", y= "tiempo - min", x= "categorías")+
-  scale_fill_brewer() +
-  #scale_fill_manual(values = c("#00070D", "#012447", "#034A94", "#0570E1", "#3998FB","#37B6FC"))+
-  theme(legend.position = "none")
-t2h
-```
-
-### Mujeres por categoría
-```{r, fig.height=3}
-ggplot(CarreraLuz22F, aes(x = categoria, y = timerun/60 )) +
-  geom_boxplot(aes(fill = categoria)) + 
-  # facet_wrap(~sex, ncol=1, labeller = labeller(dose = etiquetas))+
-  labs(title = "", y= "tiempo - min", x= "categorías")+
-  scale_fill_brewer() +
-  #scale_fill_manual(values = c("#00070D", "#012447", "#034A94", "#0570E1", "#3998FB","#37B6FC"))+
-  theme(legend.position = "none")
-t2m
-```
-
-### Más información
-
-```{r, echo=FALSE, out.width="30%", fig.align = "center"}
-knitr::include_graphics("carrera1.png")
-```
-
-**10.07 K** Participantes desde los 15 años en adelante.
-
-**Salida**: Hotel Intercontinental, calle 5, Carrera 6, carrera 4c, carrera1, carrera 4, calle de la escopeta, museo arqueológico la merced, bulevar del rio, puente Ortiz, av 2N, parque lineal rio Cali av2n, calle 25, parque lineal av1n, calle 13, carrera 1 calle 12, carrera 5, calle 10, gobernación del valle, edificio Aristi carrera 9, calle 9 plazoleta de san francisco, bulevar del rio, calle 8, carrera 4, carrera 3ª, parque del peñón, carrera 3, carrera 3ª oeste, calle 5 oeste, carrera 4, av Belalcázar, carrera 2ª oeste, librería nacional, carrera 1c, museo la tertulia, av Colombia, pepe ganga, carrera 3, carrera 2, carrera 3ª, av Colombia, carrera 4, meta hotel intercontinental. [juanchocorrelon.com](https://juanchocorrelon.com/intercontinental-10k-luz-2022/#10k)
-
-Column {data-width=400}
------------------------------------------------------------------------
-
 ### Tiempo mujeres categoría Abierta
 
 ```{r}
@@ -138,7 +112,7 @@ hist(x, xlim=c(30,120), ylim=c(0,80),las=1,
 main = " ",
 xlab="tiempo (min)",
 ylab = "frecuencia",
-col ="#ee964b")
+col ="#C247AC")
 ```
 
 ### Tiempo hombres categoría Abierta
@@ -151,26 +125,84 @@ hist(x, xlim=c(30,120), ylim=c(0,250),las=1,
 main = " ",
 xlab="tiempo (min)",
 ylab = "frecuencia",
-col ="#ee964b")
+col ="#B3300D")
 ```
 
-Column { data-width=50 }
+
+### Hombre por categorías
+
+```{r, fig.height=2}
+ggplot(CarreraLuz22M, aes(x = categoria, y = timerun/60 )) +
+  geom_boxplot(aes(fill = categoria)) + 
+  # facet_wrap(~sex, ncol=1, labeller = labeller(dose = etiquetas))+
+  labs(title = "", y= "tiempo - min", x= "categorías")+
+  scale_fill_brewer() +
+  #scale_fill_manual(values = c("#00070D", "#012447", "#034A94", "#0570E1", "#3998FB","#37B6FC"))+
+  theme(legend.position = "none")
+t2h
+```
+
+### Mujeres por categoría
+
+```{r, fig.height=2}
+ggplot(CarreraLuz22F, aes(x = categoria, y = timerun/60 )) +
+  geom_boxplot(aes(fill = categoria)) + 
+  # facet_wrap(~sex, ncol=1, labeller = labeller(dose = etiquetas))+
+  labs(title = "", y= "tiempo - min", x= "categorías")+
+  scale_fill_brewer() +
+  #scale_fill_manual(values = c("#00070D", "#012447", "#034A94", "#0570E1", "#3998FB","#37B6FC"))+
+  theme(legend.position = "none")
+t2m
+```
+
+
+# Tablero 2, indicadores.
+
+Column {data-width=400}
+-----------------------------------------------------------------------
+
+### Registro de velocidad Máxima
+```{r}
+velocidadMin=round(10070/min(CarreraLuz22$timerun),2)
+gauge(velocidadMin, min = 0, max = 6, symbol = 'm/s', gaugeSectors(
+  success = c(4.5, 6), warning = c(2,4.4), danger = c(0, 1.9)
+))
+```
+
+### Registro de velocidad Promedio
+```{r}
+velocidadProm=round(10070/mean(CarreraLuz22$timerun),2)
+gauge(velocidadProm, min = 0, max = 6, symbol = 'm/s', gaugeSectors(
+  success = c(4.5, 6), warning = c(2,4.4), danger = c(0, 1.9)
+))
+```
+
+### Registro de velocidad Mínima
+```{r}
+velocidadMax=round(10070/max(CarreraLuz22$timerun),2)
+gauge(velocidadMax, min = 0, max = 6, symbol = 'm/s', gaugeSectors(
+  success = c(4.5, 6), warning = c(2,4.4), danger = c(0, 1.9)
+))
+```
+
+
+Column { data-width=20 }
 -----------------------------------------------------------------------
 ### minimo  {.value-box}
 ```{r}
-valueBox(value =paste(round(min(CarreraLuz22$timerun/60),1), "min"), 
-         caption = "Tiempo ganador", 
+valueBox(value =paste(round(mean(CarreraLuz22$timerun)/60,1), "min"), 
+         caption = "Promedio tiempo Corredores", 
          icon = "fa-thumbs-up", 
-         color = "#0EB0C6")
+         color = "#E6AA1F")
 ```
 
 
 ### velocidad  {.value-box}
 ```{r}
-valueBox(value =paste(round(10070/min(CarreraLuz22$timerun),2),"m/s"), # ud1$cierre, 
-         caption = "Máxima velocidad", 
+valueBox(value =paste(round(10070/mean(CarreraLuz22$timerun),2),"m/s"), # ud1$cierre, 
+         caption = "Velocidad promedio", 
          icon = "fa-clock", 
-         color = "#0EB0C6")
+         color = "#E6AA1F")
 ```
 
 
@@ -179,7 +211,7 @@ valueBox(value =paste(round(10070/min(CarreraLuz22$timerun),2),"m/s"), # ud1$cie
 valueBox(value = paste(10.07,"Km"), #ud1$min, 
          caption = "Distancia recorrida", 
          icon = "fa-solod fa-person-walking-arrow-right", 
-         color = "#0EB0C6")
+         color = "#E6AA1F")
 ```
 
 
@@ -188,24 +220,18 @@ valueBox(value = paste(10.07,"Km"), #ud1$min,
 valueBox(value = paste(length(CarreraLuz22$timerun),"atletas"), 
          caption = "Número de participantes", 
          icon = "fa-people", 
-         color = "#0EB0C6")
+         color = "#E6AA1F")
 ```
-
 
 ### porcentaje  {.value-box}
 ```{r}
 valueBox(value = paste(round(length(CarreraLuz22F$timerun)/length(CarreraLuz22$timerun)*100,2),"%"), 
          caption = "Porcentaje mujeres", 
-         icon = "  ", 
-         color = "#0EB0C6")
+         icon = "airplane-outline", 
+         color = "#E6AA1F")
 ```
 
-### promedio  {.value-box}
-```{r}
-valueBox(value = paste(round(mean(CarreraLuz22$timerun/60),2),"min"), 
-         caption = "Tiempo promedio de carrera", 
-         icon = "  ", 
-         color = "#0EB0C6")
-```
+
+
 
 
