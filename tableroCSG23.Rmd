@@ -77,11 +77,12 @@ Column {data-width=700 .tabset}
 
 **Total participantes: 1922** Relación de cantidad de mujeres y hombres.
 
-```{r, fig.height=1}
-summary(CarreraLuz22$edad)
+```{r, out.width='70%',fig.height=2}
 
 ggplot(CarreraLuz22,aes(x=sex))+geom_bar(aes(fill=categoria))
+
 ```
+
 
 ### Tiempos de carrera
 
@@ -232,6 +233,15 @@ valueBox(value = paste(round(length(CarreraLuz22F$timerun)/length(CarreraLuz22$t
 ```
 
 
+# Tablero 3, Análisis
+
+**1. Analisis de datos**: Analizando el comportamiento de los datos de la carrera, se tienen 3 categorías generales. La primera considera solo jóvenes con un bajo porcentaje de participación en relación con las demás categorías. Esto para ambos géneros, masculino y femenino. Para la siguiente categoría en cambio se aprecia más del 50% de participación en la categoría abierta. Para la última categoría se consideran tres sub grupos de veteranos, A, B y C. El total de participantes de la carrera es de 1922, encontrando que las edades de estos tienen una media aritmética de 37 años, con un valor mínimo de edades de 15 años hasta un valor máximo de participación de 76 años.
+
+Continuando con la revisión de valores asociados a la carrera fue posible encontrar que el dato medio del tiempo de carrera es de 75 minutos (sección 2 - Tiempos de Carrera). El dato que evidencia mayor cantidad de tiempo de carrera se ubica en el subgrupo de veteranos A. De acuerdo con los histogramas para mujeres se observa una frecuencia mayor entre los tiempos entre los 60 y 80 minutos, y para los hombres entre 60 y 70 minutos.
+
+Dados los indicadores del tablero 2, se resaltan velocidades promedio de 2,6 m/s, mínima de 1 m/s y una máxima de 5,1 m/s. La velocidad máxima está condicionada al participante con menor tiempo de carrera y la distancia del trayecto de 10,07km.
+
+**2. Más información trayecto** Hotel Intercontinental, calle 5, Carrera 6, carrera 4c, carrera1, carrera 4, calle de la escopeta, museo arqueológico la merced, bulevar del rio, puente Ortiz, av 2N, parque lineal rio Cali av2n, calle 25, parque lineal av1n, calle 13, carrera 1 calle 12, carrera 5, calle 10, gobernación del valle, edificio Aristi carrera 9, calle 9 plazoleta de san francisco, bulevar del rio, calle 8, carrera 4, carrera 3ª, parque del peñón, carrera 3, carrera 3ª oeste, calle 5 oeste, carrera 4, av Belalcázar, carrera 2ª oeste, librería nacional, carrera 1c, museo la tertulia, av Colombia, pepe ganga, carrera 3, carrera 2, carrera 3ª, av Colombia, carrera 4, meta hotel intercontinental. [juanchocorrelon.com](https://juanchocorrelon.com/intercontinental-10k-luz-2022/#10k)
 
 
 
